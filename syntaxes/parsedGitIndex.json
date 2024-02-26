@@ -1,0 +1,14 @@
+{
+    "scopeName": "source.parsedGitIndex",
+    "patterns": [
+        {
+            "include": "#parsedGitIndexComment"
+        }
+    ],
+    "repository": {
+        "parsedGitIndexComment": {
+            "match": "\\/\\/.*",
+            "name": "comment"
+        }
+    }
+}

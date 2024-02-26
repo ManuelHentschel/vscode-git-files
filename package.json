@@ -1,0 +1,142 @@
+{
+  "name": "gitfiles",
+  "displayName": "Git Files",
+  "description": "View Internal Git Files",
+  "version": "0.0.1",
+  "publisher": "manhen",
+  "license": "MIT",
+	"icon": "img/icon.png",
+  "author": {
+    "name": "Manuel Hentschel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ManuelHentschel/vscode-git-files"
+  },
+  "bugs": {
+    "url": "https://github.com/ManuelHentschel/vscode-git-files/issues"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "parsedGitIndex"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "parsedGitIndex",
+        "scopeName": "source.parsedGitIndex",
+        "path": "./syntaxes/parsedGitIndex.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "gitfiles",
+      "properties": {
+        "gitfiles.alwaysShowCommands": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to show all context menu commands and hyperlinks for all files."
+        },
+        "gitfiles.autoReveal": {
+          "type": "string",
+          "default": "always",
+          "enum": ["always", "inherit", "never"],
+          "markdownEnumDescriptions": [
+            "Always reveal",
+            "Inherit from `#explorer.autoReveal#`",
+            "Never reveal"
+          ],
+          "markdownDescription": "Whether to reveal the source file of opened git files in the explorer view or inherit from  `#explorer.autoReveal#`."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "gitfiles.parseIndexFile",
+        "title": "(Attempt to) Parse Index File",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.showGitFiles",
+        "title": "Show .git Folder",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.showPackContent",
+        "title": "Show Pack Content",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.showPackIndex",
+        "title": "Show Pack Index",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.viewSha",
+        "title": "View Sha",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.catFile",
+        "title": "(Attempt to) git cat-file",
+        "category": "Git Files"
+      },
+      {
+        "command": "gitfiles.revealInExplorerView",
+        "title": "Reveal Active File in Explorer View",
+        "category": "Git Files"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "gitfiles.parseIndexFile",
+          "when": "!explorerResourceIsFolder && (config.gitfiles.alwaysShowCommands || resourcePath =~ /\\.git[\\\\\/]index$/)"
+        },
+        {
+          "command": "gitfiles.catFile",
+          "when": "!explorerResourceIsFolder"
+        },
+        {
+          "command": "gitfiles.showPackContent",
+          "when": "!explorerResourceIsFolder && (config.gitfiles.alwaysShowCommands || resourcePath =~ /\\.git[\\\\\/]objects[\\\\\/]pack[\\\\\/].*\\.pack/)"
+        },
+        {
+          "command": "gitfiles.showPackIndex",
+          "when": "!explorerResourceIsFolder && (config.gitfiles.alwaysShowCommands || resourcePath =~ /\\.git[\\\\\/]objects[\\\\\/]pack[\\\\\/].*\\.idx/)"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "gitfiles.catFile"
+        },
+        {
+          "command": "gitfiles.showPackContent",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+		"@types/node": "14.x",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"eslint": "^7.27.0",
+		"typescript": "^4.9.2"
+  }
+}
