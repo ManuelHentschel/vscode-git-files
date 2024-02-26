@@ -2,7 +2,7 @@
   "name": "gitfiles",
   "displayName": "Git Internals",
   "description": "View Internal Git Files",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "manhen",
   "license": "MIT",
 	"icon": "img/icon.png",
