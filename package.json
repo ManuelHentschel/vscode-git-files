@@ -1,6 +1,6 @@
 {
   "name": "gitfiles",
-  "displayName": "Git Files",
+  "displayName": "Git Internals",
   "description": "View Internal Git Files",
   "version": "0.0.1",
   "publisher": "manhen",
